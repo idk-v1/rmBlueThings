@@ -7,3 +7,7 @@
 Drag and drop files and folders onto exe file. <br>
 This will create new images in the same places with the same name, <br>
 but with "-b" added just before the extension. <br>
+<br>
+To use this program with another color, <br>
+create a file called "newColor" in the same directory, <br>
+and add a hex color in the format of [RRGGBBAA].
