@@ -29,10 +29,11 @@ static void rmBlue(const dir_ent& entry, rgba color, bool keepFiles)
 		savePath = entry.path().parent_path().string();
 		saveName = entry.path().filename().string();
 		saveName.erase(saveName.find('.'));
-		stbi_write_png((savePath + "/" + saveName + "-b.png").data(), width, height, 4, data, width * 4);
+		if (keepFiles)
+			stbi_write_png((savePath + "/" + saveName + "-b.png").data(), width, height, 4, data, width * 4);
+		else
+			stbi_write_png(entry.path().string().data(), width, height, 4, data, width * 4);
 		stbi_image_free(data);
-		if (!keepFiles)
-			fs::remove(entry.path());
 	}
 	else
 		printf("Error: Unable to open %s\n", entry.path().string().data());
