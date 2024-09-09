@@ -11,3 +11,6 @@ but with "-b" added just before the extension. <br>
 To use this program with another color, <br>
 create a file called "newColor" in the same directory, <br>
 and add a hex color in the format of [RRGGBBAA].
+<br>
+This program will overwrite the originals by default.<br>
+To disable this, create a file called "keepOrigin"
