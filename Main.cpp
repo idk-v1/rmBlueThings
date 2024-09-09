@@ -15,7 +15,7 @@ using dir_ent = fs::directory_entry;
 typedef unsigned int rgba;
 typedef unsigned long long loong;
 
-static void rmBlue(const dir_ent& entry, rgba color)
+static void rmBlue(const dir_ent& entry, rgba color, bool keepFiles)
 {
 	std::string savePath, saveName;
 	int width, height, bpp;
@@ -31,6 +31,8 @@ static void rmBlue(const dir_ent& entry, rgba color)
 		saveName.erase(saveName.find('.'));
 		stbi_write_png((savePath + "/" + saveName + "-b.png").data(), width, height, 4, data, width * 4);
 		stbi_image_free(data);
+		if (!keepFiles)
+			fs::remove(entry.path());
 	}
 	else
 		printf("Error: Unable to open %s\n", entry.path().string().data());
@@ -48,6 +50,14 @@ int main(int argc, char** argv)
 		newColor.close();
 	}
 
+	bool keepFiles = false;
+	std::ifstream keepOrigin("keepOrigin");
+	if (keepOrigin.is_open())
+	{
+		keepFiles = true;
+		keepOrigin.close();
+	}
+
 	rgba r, g, b, a;
 	r = color >> 24 & 255;
 	g = color >> 16 & 255;
@@ -62,10 +72,10 @@ int main(int argc, char** argv)
 		{
 			for (auto& entry : rec_dir_it(argv[i]))
 				if (entry.is_regular_file())
-					rmBlue(entry, color);
+					rmBlue(entry, color, keepFiles);
 		}
 		else
-			rmBlue(entry, color);
+			rmBlue(entry, color, keepFiles);
 	}
 
 	return 0;
