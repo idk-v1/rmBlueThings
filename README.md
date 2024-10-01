@@ -5,7 +5,7 @@
 
 ### Usage
 Drag and drop files and folders onto exe file. <br>
-This will remove the color 0x000084FF ![#000084](https://placehold.co/16x16/000084/000084.png) `#FFFFFF` from the image(s). (This overwrites the files by default.)<br><br>
+This will remove the color 0x000084FF ![#000084](https://placehold.co/16x16/000084/000084.png) from the image(s). (This overwrites the files by default.)<br><br>
 To use this program with another color, <br>
 create a file called "newColor" in the same directory, <br>
 and add a hex color in the format of [RRGGBBAA].
